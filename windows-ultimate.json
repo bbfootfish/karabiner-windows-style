@@ -1,0 +1,221 @@
+{
+  "title": "Windows终极完整版(Alt+F4+Ctrl+X+F4修复+全套功能)",
+  "rules": [
+    {
+      "description": "左侧修饰键重映射：fn→Command, Control→fn, Command→Control",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": { "key_code": "fn" },
+          "to": [{ "key_code": "left_command" }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "left_control" },
+          "to": [{ "key_code": "fn" }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "left_command" },
+          "to": [{ "key_code": "left_control" }]
+        }
+      ]
+    },
+    {
+      "description": "Control+Tab 切换窗口 (映射后Control=原Command键)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "tab",
+            "modifiers": { "mandatory": ["left_control"] }
+          },
+          "to": [
+            { "key_code": "tab", "modifiers": ["command"] }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Win+E 打开访达",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "e",
+            "modifiers": { "mandatory": ["left_option"] }
+          },
+          "to": [
+            { "shell_command": "open /System/Library/CoreServices/Finder.app" }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Win+D 显示桌面",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "d",
+            "modifiers": { "mandatory": ["left_option"] }
+          },
+          "to": [{ "key_code": "f11" }]
+        }
+      ]
+    },
+    {
+      "description": "Win+L 系统原生锁屏(无闪退，Command+Control+Q)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "l",
+            "modifiers": { "mandatory": ["left_option"] }
+          },
+          "to": [
+            { "key_code": "q", "modifiers": ["command", "control"] }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Win+R 打开聚焦搜索(等效运行)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "r",
+            "modifiers": { "mandatory": ["left_option"] }
+          },
+          "to": [
+            { "key_code": "spacebar", "modifiers": ["command"] }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Win+F 全局搜索",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f",
+            "modifiers": { "mandatory": ["left_option"] }
+          },
+          "to": [
+            { "key_code": "spacebar", "modifiers": ["command"] }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Alt+F4 关闭当前窗口(修复F4冲突)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f4",
+            "modifiers": { "mandatory": ["option"] }
+          },
+          "to": [
+            { "key_code": "w", "modifiers": ["command"] }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Ctrl+W 关闭标签页(浏览器/访达通用)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "w",
+            "modifiers": { "mandatory": ["left_control"] }
+          },
+          "to": [
+            { "key_code": "w", "modifiers": ["command"] }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Ctrl+Shift+T 恢复关闭的标签页(浏览器/访达通用)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "t",
+            "modifiers": { "mandatory": ["left_control", "left_shift"] }
+          },
+          "to": [
+            { "key_code": "t", "modifiers": ["command", "shift"] }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Ctrl+X 剪切功能(文本/文件通用)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "x",
+            "modifiers": { "mandatory": ["left_control"] }
+          },
+          "to": [
+            { "key_code": "x", "modifiers": ["command"] }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "访达回车=打开文件",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": ["^com.apple.finder$"]
+            }
+          ],
+          "from": { "key_code": "return_or_enter" },
+          "to": [{ "key_code": "o", "modifiers": ["command"] }]
+        }
+      ]
+    },
+    {
+      "description": "访达F2=重命名",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": ["^com.apple.finder$"]
+            }
+          ],
+          "from": { "key_code": "f2" },
+          "to": [{ "key_code": "return_or_enter" }]
+        }
+      ]
+    },
+    {
+      "description": "解除F4默认搜索功能(防止与Alt+F4冲突)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": { "key_code": "f4" },
+          "to": [{ "key_code": "f4" }],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": ["^com.apple.finder$", "^com.apple.Safari$"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
